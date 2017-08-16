@@ -7,7 +7,7 @@ var ctx = canvas.getContext('2d');
 
 
 var part = new Particle(400, 300, 2);
-var wind = new Vector2D(10, 5);
+var wind = new Vector2D(1, 0.5);
 
 console.log(wind);
 console.log(part.acc);
@@ -15,7 +15,8 @@ part.addForce(wind);
 console.log(wind);
 console.log(part.acc);
 
-var ball = new Circle(400, 300, 2, 10);
+var ball = new Ball(400, 300, 2, 10);
+ball.addForce(wind);
 
 // var u = new Vector2D(4, 3);
 // var v = new Vector2D(2, 5);

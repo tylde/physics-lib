@@ -1,6 +1,6 @@
 class Particle {
     constructor(x, y, mass) {
-        this.pos = new Vector2D(x, y, mass);
+        this.pos = new Vector2D(x, y);
         this.vel = new Vector2D(0, 0);
         this.acc = new Vector2D(0, 0);
 
