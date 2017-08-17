@@ -5,32 +5,32 @@ class Ball extends Circle {
         this.topspeed = 10;
     }
     move() {
-        this.vel.add(this.acc);
-        this.vel.limit(this.topspeed);
-        this.pos.add(this.vel);
+        this.velocity.add(this.acceleration);
+        this.velocity.limit(this.topspeed);
+        this.position.add(this.velocity);
         
-        if (this.pos.y - this.r < 0) {
-            this.pos.y = 0 + this.r;
-            this.vel.y = -this.vel.y;
+        if (this.position.y - this.r < 0) {
+            this.position.y = 0 + this.r;
+            this.velocity.y = -this.velocity.y;
         }
-        else if (this.pos.y + this.r > canvas.height) {
-            this.pos.y = canvas.height - this.r;
-            this.vel.y = -this.vel.y;
+        else if (this.position.y + this.r > canvas.height) {
+            this.position.y = canvas.height - this.r;
+            this.velocity.y = -this.velocity.y;
         }
-        if (this.pos.x - this.r < 0) {
-            this.pos.x = 0 + this.r;
-            this.vel.x = -this.vel.x;
+        if (this.position.x - this.r < 0) {
+            this.position.x = 0 + this.r;
+            this.velocity.x = -this.velocity.x;
         }
-        else if (this.pos.x + this.r > canvas.width) {
-            this.pos.x = canvas.width - this.r;
-            this.vel.x = -this.vel.x;
+        else if (this.position.x + this.r > canvas.width) {
+            this.position.x = canvas.width - this.r;
+            this.velocity.x = -this.velocity.x;
         }
     }
     draw() {
         ctx.fillStyle = 'white';
         ctx.beginPath();
         ctx.lineWidth = 2;
-        ctx.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI*2);
+        ctx.arc(this.position.x, this.position.y, this.r, 0, Math.PI*2);
         ctx.fill();
         ctx.strokeStyle = '#123';
         ctx.stroke();
@@ -44,40 +44,40 @@ class Ball extends Circle {
 
 // class Ball {
 //     constructor(x, y, r) {
-//         this.pos = new Vector2D(x, y);
-//         this.vel = new Vector2D(2, 5);
-//         this.acc = new Vector2D(0, 0);
+//         this.position = new Vector2D(x, y);
+//         this.velocity = new Vector2D(2, 5);
+//         this.acceleration = new Vector2D(0, 0);
 //         this.topspeed = 10;
 
 //         this.r = r;
 //     }
 //     move() {
-//         this.vel.add(this.acc);
-//         this.vel.limit(this.topspeed);
-//         this.pos.add(this.vel);
+//         this.velocity.add(this.acceleration);
+//         this.velocity.limit(this.topspeed);
+//         this.position.add(this.velocity);
         
-//         if (this.pos.y - this.r < 0) {
-//             this.pos.y = 0 + this.r;
-//             this.vel.y = -this.vel.y;
+//         if (this.position.y - this.r < 0) {
+//             this.position.y = 0 + this.r;
+//             this.velocity.y = -this.velocity.y;
 //         }
-//         else if (this.pos.y + this.r > canvas.height) {
-//             this.pos.y = canvas.height - this.r;
-//             this.vel.y = -this.vel.y;
+//         else if (this.position.y + this.r > canvas.height) {
+//             this.position.y = canvas.height - this.r;
+//             this.velocity.y = -this.velocity.y;
 //         }
-//         if (this.pos.x - this.r < 0) {
-//             this.pos.x = 0 + this.r;
-//             this.vel.x = -this.vel.x;
+//         if (this.position.x - this.r < 0) {
+//             this.position.x = 0 + this.r;
+//             this.velocity.x = -this.velocity.x;
 //         }
-//         else if (this.pos.x + this.r > canvas.width) {
-//             this.pos.x = canvas.width - this.r;
-//             this.vel.x = -this.vel.x;
+//         else if (this.position.x + this.r > canvas.width) {
+//             this.position.x = canvas.width - this.r;
+//             this.velocity.x = -this.velocity.x;
 //         }
 //     }
 //     draw() {
 //         ctx.fillStyle = 'white';
 //         ctx.beginPath();
 //         ctx.lineWidth = 2;
-//         ctx.arc(this.pos.x, this.pos.y, this.r, 0, Math.PI*2);
+//         ctx.arc(this.position.x, this.position.y, this.r, 0, Math.PI*2);
 //         ctx.fill();
 //         ctx.strokeStyle = '#123';
 //         ctx.stroke();
