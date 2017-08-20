@@ -6,38 +6,55 @@ var ctx = canvas.getContext('2d');
 
 // ****************************************************************************************
 
+var balls = [];
+for (let i = 0; i < 100; i++) {
+    var isGood = false;
+    var ball = {};
+    while(!isGood) {
+        isGood = true;
+        ball = new Ball(getRandomInt(20, 780), getRandomInt(20, 580), 1, 10);
+        for (let j = 0; j < balls.length; j++) {
+            let vect = Vector2D.sub(ball.position, balls[j].position);
+            let dist = vect.mag();
+            if (dist < ball.r + balls[j].r) {
+                isGood = false;
+            }
+        }
+    }
+    balls.push(ball);
 
-var ball = new Ball(400, 300, 3, 10);
-ball.velocity.x = 5;
-ball.velocity.y = 8;
+    balls[i].velocity = new Vector2D(getRandomFloat(-2, 2, 3), getRandomFloat(-2, 2, 3));
+}
 
+var timer = setInterval(script, 1000 / FRAMES);
 
-// var balls = [];
-// for (let i = 0; i < 15; i++) {
-//     balls.push(new Ball(getRandomInt(50, 750), 100, 4*i, 2*i));
+// function loop() {
+//     script();
+//     window.requestAnimationFrame(function() {
+//         loop();
+//     });
 // }
-
-// for (let i = 0; i < balls.length; i++) {
-//     var gravity = new Vector2D(0, 0.1 * balls[i].mass);
-//     balls[i].addForce(gravity);
-// }
-
-
-
-var timer = setInterval(script, 1000 / 60);
-
+// loop();
 
 function script() {
     update();
     draw();
 }
 
-
 function update() {
-    ball.zeroAcc();
-    // for (let i = 0; i < balls.length; i++) {
-    //     balls[i].move();
-    // }
+    for (let i = 0; i < balls.length; i++) {
+        balls[i].move();
+    }
+
+    for (let i = 0; i < balls.length; i++) {
+        for (let j = i + 1; j < balls.length; j++) {
+            if (balls[i] != balls[j]) {
+                balls[i].bounce(balls[j]);
+            }
+        }
+    }
+
+    //ball.zeroAcc();
 
     // // GRAVITY
     // var gravity = new Vector2D(0, 0.1 * ball.mass);
@@ -59,21 +76,13 @@ function update() {
     // var drag = ball.velocity.get().norm().mult(-1).mult(surface).mult(dragMag);
     // ball.addForce(drag);
     // console.log(ball.velocity);
-
-
-    ball.move()
 }
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#404040';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    // for (let i = 0; i < balls.length; i++) {
-    //     balls[i].draw();
-    // }
-    ball.draw();
+    for (let i = 0; i < balls.length; i++) {
+        balls[i].draw();
+    }
 }
-
-
-
-
