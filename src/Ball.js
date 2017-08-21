@@ -42,11 +42,8 @@ class Ball extends Circle {
         let vNormal = Vector2D.sub(ball.position, this.position);
         let vTangent = new Vector2D(-vNormal.y, vNormal.x)
         let dist = vNormal.mag();
-        //if (dist < this.r + ball.r && (this.collision === false && ball.collision === false)) {
+
         if (dist < this.r + ball.r) {
-            // this.collision = true;
-            // ball.collision = true;
-            console.log('bounce');
             vNormal.norm();
             vTangent.norm();
             let v1n = vNormal.dot(this.velocity);
@@ -68,10 +65,12 @@ class Ball extends Circle {
 
             this.velocity = vel1n.add(vel1t);
             ball.velocity = vel2n.add(vel2t);
-        }
-        else if (dist > this.r + ball.r) {
-            // this.collision = false;
-            // ball.collision = false;
+            
+            let dr = (this.r + ball.r - dist) / 2;
+            let cor1 = vNormal.get().mult(-dr);
+            let cor2 = vNormal.get().mult(dr);
+            this.position.add(cor1);
+            ball.position.add(cor2);
         }
     }
 }
